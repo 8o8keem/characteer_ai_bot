@@ -10,7 +10,6 @@ app = Flask(__name__)
 
 # Your verify token and page access token
 VERIFY_TOKEN = "my_verify_token"  # Must match Facebook dashboard exactly
-PAGE_ACCESS_TOKEN = "EAA..."  # Your real page access token
 
 # Character.AI info
 CHAR_TOKEN = "135ae7a39a84b2c4081c68ca39ef8c948f112e16"

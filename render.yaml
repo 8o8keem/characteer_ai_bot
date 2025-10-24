@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: characterai-messenger-bot
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python3 proj.py"
+    plan: free

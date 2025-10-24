@@ -33,14 +33,19 @@ def verify():
 @app.route("/webhook", methods=["POST"])
 def webhook():
     data = request.get_json()
-    print("📩 Received message:", data)
-    for entry in data.get("entry", []):
-        for messaging in entry.get("messaging", []):
-            if "message" in messaging:
-                sender_id = messaging["sender"]["id"]
-                user_msg = messaging["message"].get("text", "")
-                asyncio.run(handle_message(sender_id, user_msg))
+    print("📩 FULL PAYLOAD RECEIVED FROM FACEBOOK:", data, flush=True)  # full debug
+    try:
+        for entry in data.get("entry", []):
+            for messaging in entry.get("messaging", []):
+                if "message" in messaging:
+                    sender_id = messaging["sender"]["id"]
+                    user_msg = messaging["message"].get("text", "")
+                    print(f"🧠 Got message: '{user_msg}' from {sender_id}", flush=True)
+                    asyncio.run(handle_message(sender_id, user_msg))
+    except Exception as e:
+        print("⚠️ Error processing message:", e, flush=True)
     return "ok", 200
+
 
 async def handle_message(sender_id, user_msg):
     await client.authenticate(CHAR_TOKEN, web_next_auth=WEB_NEXT_AUTH)

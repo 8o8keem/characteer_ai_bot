@@ -2,3 +2,4 @@ Flask
 requests
 PyCharacterAI
 asyncio
+nest_asyncio
